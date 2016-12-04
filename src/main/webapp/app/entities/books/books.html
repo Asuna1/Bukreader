@@ -10,8 +10,8 @@
                         Create new Books
                     </span>
                 </button>
-                <button class="btn btn-primary" ui-sref="books.show">
-                    <span class="glyphicon glyphicon-plus"></span>
+                <button class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"  ui-sref="books.show"></span>
                     <span >
                         Test show
                     </span>
@@ -44,9 +44,15 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
+                                    ui-sref="books.show({id:books.id})"
+                                    class="btn btn-success btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
                                     ui-sref="books-detail({id:books.id})"
                                     class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="glyphicon glyphicon-list-alt"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
@@ -72,5 +78,6 @@
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>
+
 
 
