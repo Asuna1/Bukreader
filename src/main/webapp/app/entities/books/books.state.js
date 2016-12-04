@@ -134,6 +134,43 @@
                 });
             }]
         })
+        .state('books.show', {
+                    parent: 'books',
+                    url: '/{id}/show',
+                    data: {
+                        authorities: ['ROLE_USER']
+                    },
+                    onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                        $uibModal.open({
+                            templateUrl: 'app/entities/books/books-dialog.html',
+                            controller: 'BooksDialogController',
+                            controllerAs: 'vm',
+                            backdrop: 'static',
+                            size: 'lg',
+                            resolve: {
+                                entity: function () {
+                                    return {
+                                        isbn: null,
+                                        title: null,
+                                        author: null,
+                                        publication_year: null,
+                                        publisher: null,
+                                        image_s: null,
+                                        image_m: null,
+                                        image_l: null,
+                                        id: null
+                                    };
+
+                                }
+                            }
+                        }).result.then(function() {
+                            $state.go('books', null, { reload: 'books' });
+                        }, function() {
+                            $state.go('books');
+                        });
+                    }]
+                })
+
         .state('books.edit', {
             parent: 'books',
             url: '/{id}/edit',

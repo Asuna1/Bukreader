@@ -10,6 +10,12 @@
                         Create new Books
                     </span>
                 </button>
+                <button class="btn btn-primary" ui-sref="books.show">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Test show
+                    </span>
+                </button>
             </div>
         </div>
     </div>
@@ -29,7 +35,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="books in vm.books track by books.id">
-                    <td><img ng-src="{{books.image_m}}" alt="Tu jest obrazek"></td>
+                    <td><img ng-src="{{books.image_m}}" alt="image.." height="160" width="120"> </td>
                     <td>{{books.isbn}}</td>
                     <td>{{books.title}}</td>
                     <td>{{books.author}}</td>
