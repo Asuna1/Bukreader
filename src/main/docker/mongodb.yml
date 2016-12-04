@@ -1,9 +1,0 @@
-version: '2'
-services:
-    bugreader-mongodb:
-        container_name: bugreader-mongodb
-        image: mongo:3.3.12
-        ports:
-            - "27017:27017"
-        # volumes:
-        #     - ~/volumes/jhipster/bugreader/mongodb/:/data/db/
