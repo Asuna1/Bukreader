@@ -18,6 +18,7 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th>Image</th>
                     <th jh-sort-by="isbn"><span>Isbn</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="author"><span>Author</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -28,6 +29,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="books in vm.books track by books.id">
+                    <td><img ng-src="{{books.image_m}}" alt="Tu jest obrazek"></td>
                     <td>{{books.isbn}}</td>
                     <td>{{books.title}}</td>
                     <td>{{books.author}}</td>
@@ -64,3 +66,5 @@
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>
+
+
