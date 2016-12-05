@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "book_id",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "user_id",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "date_from",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "date_to",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "is_activated",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "is_waiting",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Integer"
+        }
+    ],
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "borrows",
+    "pagination": "pagination"
+}
