@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Books</span> {{vm.books.id}}</h2>
+    <h2><span><img ng-src="{{vm.books.image_s}}" alt="image.." height="100" width="70"></span> {{vm.books.title}} </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
@@ -24,17 +24,9 @@
         <dd>
             <span>{{vm.books.publisher}}</span>
         </dd>
-        <dt><span data-translate="bukreaderApp.books.image_s">Image S</span></dt>
-        <dd>
-            <span>{{vm.books.image_s}}</span>
-        </dd>
-        <dt><span data-translate="bukreaderApp.books.image_m">Image M</span></dt>
+        <dt><span data-translate="bukreaderApp.books.image_m">Image</span></dt>
         <dd>
             <span>{{vm.books.image_m}}</span>
-        </dd>
-        <dt><span data-translate="bukreaderApp.books.image_l">Image L</span></dt>
-        <dd>
-            <span>{{vm.books.image_l}}</span>
         </dd>
     </dl>
 

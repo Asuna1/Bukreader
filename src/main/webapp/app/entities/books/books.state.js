@@ -120,9 +120,7 @@
                                 author: null,
                                 publication_year: null,
                                 publisher: null,
-                                image_s: null,
                                 image_m: null,
-                                image_l: null,
                                 id: null
                             };
                         }
