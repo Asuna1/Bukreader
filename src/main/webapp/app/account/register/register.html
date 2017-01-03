@@ -49,6 +49,56 @@
                     </p>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="name">First name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Your name"
+                           ng-model="vm.registerAccount.name" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[A-Za-z]*$/" required>
+                    <div ng-show="form.name.$dirty && form.name.$invalid">
+                        <p class="help-block"
+                           ng-show="form.name.$error.required">
+                            Your name is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.name.$error.minlength">
+                            Your name is required to be at least 1 character.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.name.$error.maxlength">
+                            Your name cannot be longer than 50 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.name.$error.pattern">
+                            Your name can only contain letters.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="surname">Last name</label>
+                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Your surname"
+                           ng-model="vm.registerAccount.surname" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[A-Za-z]*$/" required>
+                    <div ng-show="form.surname.$dirty && form.surname.$invalid">
+                        <p class="help-block"
+                           ng-show="form.surname.$error.required">
+                            Your surname is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.surname.$error.minlength">
+                            Your surname is required to be at least 1 character.
+                        </p>
+                        <p class="help-block"
+                           ng-show="form.surname.$error.maxlength">
+                            Your surname cannot be longer than 50 characters.
+                        </p>
+                        <p class="help-surblock"
+                           ng-show="form.name.$error.pattern">
+                            Your surname can only contain letters.
+                        </p>
+                    </div>
+                </div>
+
+
                 <div class="form-group">
                     <label class="control-label" for="email">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Your e-mail"
