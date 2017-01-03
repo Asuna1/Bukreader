@@ -116,8 +116,8 @@
                         entity: function () {
                             return {
                                 isbn: null,
-                                title: null,
-                                author: null,
+                                book_id: null,
+                                user_id: null,
                                 publication_year: null,
                                 publisher: null,
                                 image_m: null,
@@ -184,6 +184,78 @@
                         });
                     }]
                 })
+
+/*
+         .state('books.test', {
+                             parent: 'books',
+                             url: '/{id}/test',
+                             data: {
+                                 authorities: ['ROLE_USER']
+                             },
+                             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                                 $uibModal.open({
+                                     templateUrl: 'app/entities/books/books-test.html',
+                                     controller: 'BooksDialogController',
+                                     controllerAs: 'vm',
+                                     backdrop: 'static',
+                                     size: 'lg',
+                                     resolve: {
+                                         entity: ['Books', function(Books) {
+                                             return Books.get({id : $stateParams.id}).$promise;
+                                         }]
+                                     }
+                                 }).result.then(function() {
+                                     $state.go('books', null, { reload: 'books' });
+                                 }, function() {
+                                     $state.go('^');
+                                 });
+                             }]
+                         })
+                         */
+
+
+
+
+
+
+
+                .state('books.test', {
+                            parent: 'books',
+                            url: '/{id}/test',
+                            data: {
+                                authorities: ['ROLE_USER']
+                            },
+                            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                                $uibModal.open({
+                                    templateUrl: 'app/entities/books/books-test.html',
+                                    controller: 'BorrowsDialogController',
+                                    controllerAs: 'vm',
+                                    backdrop: 'static',
+                                    size: 'lg',
+                                    resolve: {
+                                        entity: ['Books', function(Books) {
+                                              return Books.get({id : $stateParams.id}).$promise;
+                                        }]
+                                    }
+                                }).result.then(function() {
+                                    $state.go('books', null, { reload: 'books' });
+                                }, function() {
+                                    $state.go('books');
+                                });
+                            }]
+                        })
+
+
+
+
+
+
+
+
+
+
+
+
 
         .state('books.delete', {
             parent: 'books',

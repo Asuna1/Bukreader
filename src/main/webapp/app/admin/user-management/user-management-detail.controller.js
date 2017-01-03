@@ -5,19 +5,19 @@
         .module('bukreaderApp')
         .controller('UserManagementDetailController', UserManagementDetailController);
 
-    UserManagementDetailController.$inject = ['$stateParams', 'User'];
+    UserManagementDetailController.$inject = ['$stateParams', 'Borrows'];
 
-    function UserManagementDetailController ($stateParams, User) {
+    function UserManagementDetailController ($stateParams, Borrows) {
         var vm = this;
 
         vm.load = load;
-        vm.user = {};
+        vm.borrows = {};
 
         vm.load($stateParams.login);
 
         function load (login) {
-            User.get({login: login}, function(result) {
-                vm.user = result;
+            Borrows.get({login: login}, function(result) {
+                vm.borrows = result;
             });
         }
     }

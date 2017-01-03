@@ -26,8 +26,10 @@
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.transition = transition;
 
+        var zmienna = true;
+
         vm.loadAll();
-        
+
         Principal.identity().then(function(account) {
             vm.currentAccount = account;
         });

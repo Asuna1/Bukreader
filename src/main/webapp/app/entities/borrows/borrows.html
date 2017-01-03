@@ -36,7 +36,13 @@
                     <td>{{borrows.user_id}}</td>
                         <td>{{borrows.date_from | date:'mediumDate'}}</td>
                         <td>{{borrows.date_to | date:'mediumDate'}}</td>
-                    <td>{{borrows.is_activated}}</td>
+
+                    <td>
+                    <span class="label label-danger" ng-click="vm.setActive(borrows, true)" ng-show="!borrows.is_activated"
+                          style="cursor: pointer;">Deactivated</span>
+                        <span class="label label-success" ng-click="vm.setActive(borrows, false)" ng-show="borrows.is_activated"
+                              style="cursor: pointer;">Activated</span>
+                    </td>
                     <td>{{borrows.is_waiting}}</td>
                     <td>{{borrows.price}}</td>
                     <td class="text-right">

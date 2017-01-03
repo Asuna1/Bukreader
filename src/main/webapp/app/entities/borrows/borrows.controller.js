@@ -9,7 +9,9 @@
 
     function BorrowsController ($scope, $state, Borrows, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
-        
+
+        vm.setActive = setActive;
+
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
@@ -42,6 +44,14 @@
                 AlertService.error(error.data.message);
             }
         }
+
+        function setActive (borrow, isActivated) {
+                    borrow.is_activated = isActivated;
+                    Borrows.update(borrow, function () {
+                        vm.loadAll();
+                        vm.clear();
+                    });
+                }
 
         function loadPage (page) {
             vm.page = page;

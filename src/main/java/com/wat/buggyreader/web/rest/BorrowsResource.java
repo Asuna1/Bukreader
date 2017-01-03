@@ -3,9 +3,13 @@ package com.wat.buggyreader.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.wat.buggyreader.domain.Borrows;
 
+import com.wat.buggyreader.domain.User;
 import com.wat.buggyreader.repository.BorrowsRepository;
+import com.wat.buggyreader.repository.UserRepository;
+import com.wat.buggyreader.security.SecurityUtils;
 import com.wat.buggyreader.web.rest.util.HeaderUtil;
 import com.wat.buggyreader.web.rest.util.PaginationUtil;
+import com.wat.buggyreader.web.rest.vm.ManagedUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +35,10 @@ import java.util.Optional;
 public class BorrowsResource {
 
     private final Logger log = LoggerFactory.getLogger(BorrowsResource.class);
-        
+
     @Inject
     private BorrowsRepository borrowsRepository;
+    private UserRepository userRepository;
 
     /**
      * POST  /borrows : Create a new borrows.
@@ -94,9 +100,29 @@ public class BorrowsResource {
     public ResponseEntity<List<Borrows>> getAllBorrows(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Borrows");
+        //Optional<User> existingUser = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
+        // , @RequestBody ManagedUserVM managedUserVM
+        //Optional<User> existingUser = userRepository.findOneByLogin("testowy");
+        //User existingUser = userRepository.findOne("testowy");
         Page<Borrows> page = borrowsRepository.findAll(pageable);
+
+        Iterable<Borrows> borrows = page.getContent();
+        List<Borrows> bor2 = new LinkedList<>();
+        for(Borrows borrow : borrows)
+        {
+            String war = borrow.getUser_id();
+            String login = SecurityUtils.getCurrentUserLogin();
+/*
+            if(war.equals(existingUser.get()))
+            {
+
+            }
+*/
+            bor2.add(borrow);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/borrows");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(bor2, headers, HttpStatus.OK);
     }
 
     /**

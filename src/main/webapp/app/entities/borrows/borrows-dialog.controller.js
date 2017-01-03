@@ -5,12 +5,20 @@
         .module('bukreaderApp')
         .controller('BorrowsDialogController', BorrowsDialogController);
 
-    BorrowsDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Borrows'];
+    BorrowsDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Borrows', 'Books'];
 
-    function BorrowsDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Borrows) {
+    function BorrowsDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Borrows, Books) {
         var vm = this;
 
+        vm.books = entity;
         vm.borrows = entity;
+
+        vm.borrows.user_id = "login";
+        vm.borrows.book_id = vm.books.isbn;
+        vm.borrows.is_activated = false;
+        vm.borrows.is_waiting = false;
+        vm.borrows.price = 5;
+
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
