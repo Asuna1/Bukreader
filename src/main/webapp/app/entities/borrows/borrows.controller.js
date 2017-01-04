@@ -45,8 +45,9 @@
             }
         }
 
-        function setActive (borrow, isActivated) {
+        function setActive (borrow, isActivated, isWaiting) {
                     borrow.is_activated = isActivated;
+                    borrow.is_waiting = isWaiting;
                     Borrows.update(borrow, function () {
                         vm.loadAll();
                         vm.clear();

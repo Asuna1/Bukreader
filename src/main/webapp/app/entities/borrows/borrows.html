@@ -4,12 +4,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="borrows.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span >
-                        Create new Borrows
-                    </span>
-                </button>
             </div>
         </div>
     </div>
@@ -19,47 +13,41 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="book_id"><span data-translate="bukreaderApp.borrows.book_id">Book Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user_id"><span data-translate="bukreaderApp.borrows.user_id">User Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="book_id"><span data-translate="bukreaderApp.borrows.book_id">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-authority="ROLE_ADMIN" jh-sort-by="user_id"><span data-translate="bukreaderApp.borrows.user_id">User Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="date_from"><span data-translate="bukreaderApp.borrows.date_from">Date From</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="date_to"><span data-translate="bukreaderApp.borrows.date_to">Date To</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="is_activated"><span data-translate="bukreaderApp.borrows.is_activated">Is Activated</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="is_waiting"><span data-translate="bukreaderApp.borrows.is_waiting">Is Waiting</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-authority="ROLE_ADMIN" jh-sort-by="is_activated"><span data-translate="bukreaderApp.borrows.is_activated">Is Activated</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="is_waiting"><span data-translate="bukreaderApp.borrows.is_waiting">Is Available</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="price"><span>Price</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <th ng-show="borrows.is_waiting"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="borrows in vm.borrows track by borrows.id">
                     <td><a ui-sref="borrows-detail({id:borrows.id})">{{borrows.id}}</a></td>
                     <td>{{borrows.book_id}}</td>
-                    <td>{{borrows.user_id}}</td>
+                    <td has-authority="ROLE_ADMIN">{{borrows.user_id}}</td>
                         <td>{{borrows.date_from | date:'mediumDate'}}</td>
                         <td>{{borrows.date_to | date:'mediumDate'}}</td>
 
-                    <td>
-                    <span class="label label-danger" ng-click="vm.setActive(borrows, true)" ng-show="!borrows.is_activated"
+                    <td has-authority="ROLE_ADMIN">
+                    <span class="label label-danger" ng-click="vm.setActive(borrows, true, true)" ng-show="!borrows.is_activated"
                           style="cursor: pointer;">Deactivated</span>
-                        <span class="label label-success" ng-click="vm.setActive(borrows, false)" ng-show="borrows.is_activated"
+                        <span class="label label-success" ng-click="vm.setActive(borrows, false, false)" ng-show="borrows.is_activated"
                               style="cursor: pointer;">Activated</span>
                     </td>
                     <td>{{borrows.is_waiting}}</td>
                     <td>{{borrows.price}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="borrows-detail({id:borrows.id})"
+                            <button type="submit" ng-show="borrows.is_waiting"
+                                    ui-sref="borrows.show({id:borrows.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="borrows.edit({id:borrows.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
+                            <button type="submit" has-authority="ROLE_ADMIN"
                                     ui-sref="borrows.delete({id:borrows.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>

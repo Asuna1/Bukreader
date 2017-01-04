@@ -13,11 +13,10 @@
         vm.books = entity;
         vm.borrows = entity;
 
-        vm.borrows.user_id = "login";
-        vm.borrows.book_id = vm.books.isbn;
+        vm.borrows.book_id = vm.books.title;
+        vm.borrows.id = null;
         vm.borrows.is_activated = false;
         vm.borrows.is_waiting = false;
-        vm.borrows.price = 5;
 
         vm.clear = clear;
         vm.datePickerOpenStatus = {};

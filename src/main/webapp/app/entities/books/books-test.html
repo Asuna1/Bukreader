@@ -3,15 +3,11 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
             ng-click="vm.clear()">&times;</button>
-    <h4 class="modal-title">Sample text of</h4>
-    <span>{{vm.books.Id}}</span>
+    <h4 class="modal-title">Purchase</h4>
 </div>
 <div class="modal-body" >
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span>Id</span></dt>
-        <dd>
-            <span>{{vm.books.Id}}</span>
-        </dd>
+
         <dt><span>ISBN</span></dt>
         <dd>
             <span>{{vm.borrows.isbn}}</span>
@@ -29,13 +25,33 @@
             <span>{{vm.borrows.publication_year}}</span>
         </dd>
     </dl>
+    <div class="form-group">
+        <label class="control-label" data-translate="bukreaderApp.borrows.date_from" for="field_date_from">Date From</label>
+        <div class="input-group">
+            <input id="field_date_from" type="text" class="form-control" name="date_from" uib-datepicker-popup="{{dateformat}}" ng-model="vm.borrows.date_from" is-open="vm.datePickerOpenStatus.date_from"
+            />
+            <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date_from')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" data-translate="bukreaderApp.borrows.date_to" for="field_date_to">Date To</label>
+        <div class="input-group">
+            <input id="field_date_to" type="text" class="form-control" name="date_to" uib-datepicker-popup="{{dateformat}}" ng-model="vm.borrows.date_to" is-open="vm.datePickerOpenStatus.date_to"
+            />
+            <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date_to')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
         <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Close</span>
     </button>
     <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-        <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        <span class="glyphicon glyphicon-usd"></span>&nbsp;<span>Buy</span>
     </button>
 </div>
 </form>

@@ -158,6 +158,31 @@
                 });
             }]
         })
+        .state('borrows.show', {
+                            parent: 'borrows',
+                            url: '/{id}/show',
+                            data: {
+                                authorities: ['ROLE_USER']
+                            },
+                            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                                $uibModal.open({
+                                    templateUrl: 'app/entities/borrows/borrows-show.html',
+                                    controller: 'BorrowsDialogController',
+                                    controllerAs: 'vm',
+                                    backdrop: 'static',
+                                    size: 'lg',
+                                    resolve: {
+                                        entity: ['Borrows', function(Borrows) {
+                                            return Borrows.get({id : $stateParams.id}).$promise;
+                                        }]
+                                    }
+                                }).result.then(function() {
+                                    $state.go('borrows', null, { reload: 'borrows' });
+                                }, function() {
+                                    $state.go('^');
+                                });
+                            }]
+                        })
         .state('borrows.delete', {
             parent: 'borrows',
             url: '/{id}/delete',

@@ -2,7 +2,7 @@ package com.wat.buggyreader.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.wat.buggyreader.domain.Borrows;
-
+import java.time.LocalDate;
 import com.wat.buggyreader.domain.User;
 import com.wat.buggyreader.repository.BorrowsRepository;
 import com.wat.buggyreader.repository.UserRepository;
@@ -53,6 +53,13 @@ public class BorrowsResource {
     @Timed
     public ResponseEntity<Borrows> createBorrows(@RequestBody Borrows borrows) throws URISyntaxException {
         log.debug("REST request to save Borrows : {}", borrows);
+        borrows.user_id(SecurityUtils.getCurrentUserLogin());
+        LocalDate dateFrom = borrows.getDate_from();
+        int dayFrom = dateFrom.getDayOfMonth();
+        LocalDate dateTo = borrows.getDate_to();
+        int dayTo = dateTo.getDayOfMonth();
+        int price = dayTo - dayFrom + 1;
+        borrows.setPrice(price);
         if (borrows.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("borrows", "idexists", "A new borrows cannot already have an ID")).body(null);
         }
@@ -100,25 +107,24 @@ public class BorrowsResource {
     public ResponseEntity<List<Borrows>> getAllBorrows(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Borrows");
-        //Optional<User> existingUser = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
-        // , @RequestBody ManagedUserVM managedUserVM
-        //Optional<User> existingUser = userRepository.findOneByLogin("testowy");
-        //User existingUser = userRepository.findOne("testowy");
+
         Page<Borrows> page = borrowsRepository.findAll(pageable);
 
         Iterable<Borrows> borrows = page.getContent();
         List<Borrows> bor2 = new LinkedList<>();
         for(Borrows borrow : borrows)
         {
-            String war = borrow.getUser_id();
-            String login = SecurityUtils.getCurrentUserLogin();
-/*
-            if(war.equals(existingUser.get()))
+            if(SecurityUtils.isCurrentUserInRole("ROLE_ADMIN"))
             {
-
+                bor2.add(borrow);
             }
-*/
-            bor2.add(borrow);
+            else
+            {
+                if(borrow.getUser_id().equals(SecurityUtils.getCurrentUserLogin()))
+                {
+                    bor2.add(borrow);
+                }
+            }
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/borrows");

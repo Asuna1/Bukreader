@@ -4,7 +4,7 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="bukreaderApp.borrows.book_id">Book Id</span></dt>
+        <dt><span data-translate="bukreaderApp.borrows.book_id">Title</span></dt>
         <dd>
             <span>{{vm.borrows.book_id}}</span>
         </dd>
@@ -20,11 +20,7 @@
         <dd>
             <span>{{vm.borrows.date_to | date:'mediumDate'}}</span>
         </dd>
-        <dt><span data-translate="bukreaderApp.borrows.is_activated">Is Activated</span></dt>
-        <dd>
-            <span>{{vm.borrows.is_activated}}</span>
-        </dd>
-        <dt><span data-translate="bukreaderApp.borrows.is_waiting">Is Waiting</span></dt>
+        <dt><span data-translate="bukreaderApp.borrows.is_waiting">Is Available</span></dt>
         <dd>
             <span>{{vm.borrows.is_waiting}}</span>
         </dd>
@@ -38,10 +34,5 @@
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
-
-    <button type="button" ui-sref="borrows-detail.edit({id:vm.borrows.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm"> Edit</span>
     </button>
 </div>

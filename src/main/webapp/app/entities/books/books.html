@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="books.new" >
+                <button class="btn btn-primary" ui-sref="books.new" has-authority="ROLE_ADMIN">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span >
                         Create new Books
@@ -49,22 +49,22 @@
                                 <span class="glyphicon glyphicon-list-alt"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+                            <button type="submit" has-authority="ROLE_ADMIN"
                                     ui-sref="books.edit({id:books.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+                            <button type="submit" has-authority="ROLE_ADMIN"
                                     ui-sref="books.delete({id:books.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+                            <button type="submit" has-authority="ROLE_USER"
                                     ui-sref="books.test({id:books.id})"
                                     class="btn btn-warning btn-sm">
-                                <span class="glyphicon glyphicon-floppy-disk"></span>
+                                <span class="glyphicon glyphicon-shopping-cart black"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                         </div>
